@@ -1,0 +1,24 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>Add Domains</h1>
+[[message]]
+<form action='add.php' method='post'>
+	<input type='hidden' name='action' value='add'>
+	<div class="panel panel-default">
+		<table class="table table-bordered table-nonfluid">
+			<tr>
+				<th>Domain to add</th>
+				<td>
+					<input type='text' name='domain' placeholder='Domain name (without http(s)://)' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type='submit' class='btn btn-primary' value='Add Domain'>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+{%TEMPLATE->foot%}

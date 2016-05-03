@@ -1,0 +1,50 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>Chunks</h1>
+<div class="panel panel-default">
+	<table class="table table-bordered table-nonfluid">
+		<tr>
+			<td>
+				<a class='btn btn-default' href='chunks.php?page=[[prevPage]]'{{IF !!prevPage!! < 0}} disabled{{ENDIF}}>Previous Page</a>
+			</td>
+			<th style='text-align: center;'>
+				Page [[pageNum]]
+			</th>
+			<td style='text-align: right;'>
+				<a class='btn btn-default' href='chunks.php?page=[[nextPage]]'{{IF ! !!nextPage!!}}disabled{{ENDIF}}>Next Page</a>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="panel panel-default">
+	<table class="table table-bordered table-nonfluid">
+		<tr>
+			<th>ID</th>
+			<th>Agent</th>
+			<th>Start</th>
+			<th>End</th>
+			<th>Size</th>
+			<th>&nbsp;</th>
+		</tr>
+		{{FOREACH chunk,!!chunks!!}}
+			<tr style='background-color: {{IF !!chunk.getVal('finishedTime')!! > 0}}#CCFFCC{{ENDIF}}{{IF !!chunk.getVal('finishedTime')!! == 0}}#FFE5CC{{ENDIF}};'>
+				<td>[[Util::number(%%chunk.getVal('chunkId')%%)]]</td>
+				<td>[[Util::getAgentById(%%chunk.getVal('agentId')%%)]]</td>
+				<td>[[date("d.m.Y - H:i:s", %%chunk.getVal('dispatchedTime')%%)]]</td>
+				<td>
+					{{IF !!chunk.getVal('finishedTime')!! > 0}}
+						[[date("d.m.Y - H:i:s", %%chunk.getVal('finishedTime')%%)]]
+					{{ENDIF}}
+					{{IF !!chunk.getVal('finishedTime')!! == 0}}
+						---
+					{{ENDIF}}
+				</td>
+				<td>[[chunk.getVal('size')]]</td>
+				<td>
+					<a href="chunks.php?id=[[chunk.getVal('chunkId')]]" target="_blank" class='btn btn-primary'>View Data</a>
+				</td>
+			</tr>
+		{{ENDFOREACH}}
+	</table>
+</div>
+{%TEMPLATE->foot%}

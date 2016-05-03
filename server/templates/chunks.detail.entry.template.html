@@ -1,0 +1,42 @@
+<tr style='background-color: {{IF !!entry.getVal('httpstatus')!! == 0 && !!entry.getVal('time')!! != 0}}#CCFFCC{{ENDIF}}{{IF !!entry.getVal('httpstatus')!! == 1 || !!entry.getVal('httpstatus')!! == 2}}#FFE5CC{{ENDIF}}{{IF !!entry.getVal('httpstatus')!! == -1 || !!entry.getVal('time')!! == 0}}#FFCCCC{{ENDIF}};'>
+	<td>[[entry.getVal('domainname')]]</td>
+	<td>
+		{{IF !!entry.getVal('time')!! == ""}}
+			<i>NULL</i>
+		{{ENDIF}}
+		{{IF !!entry.getVal('httpstatus')!! == "-1"}}
+			OFFLINE
+		{{ENDIF}}
+		{{IF !!entry.getVal('httpstatus')!! == 0 && !!entry.getVal('time')!! != ""}}
+			HTTPS ONLY
+		{{ENDIF}}
+		{{IF !!entry.getVal('httpstatus')!! == 1}}
+			HTTP ONLY
+		{{ENDIF}}
+		{{IF !!entry.getVal('httpstatus')!! == 2}}
+			HTTP + HTTPS
+		{{ENDIF}}
+	</td>
+	<td>
+		{{IF !!entry.getVal('time')!! == ""}}
+			<i>NULL</i>
+		{{ENDIF}}
+		{{IF !!entry.getVal('time')!! != ""}}
+			[[date("d.m.Y - H:i:s", %%entry.getVal('time')%%)]]
+		{{ENDIF}}
+	</td>
+	<td>
+		{{IF !!entry.getVal('generatormeta')!! == "" && !!entry.getVal('time')!! != ""}}
+			---
+		{{ENDIF}}
+		{{IF !!entry.getVal('generatormeta')!! == "" && !!entry.getVal('time')!! == ""}}
+			<i>NULL</i>
+		{{ENDIF}}
+		{{IF !!entry.getVal('generatormeta')!! != ""}}
+			<code>[[entry.getVal('generatormeta')]]</code>
+		{{ENDIF}}
+	</td>
+	<td>
+		<a class='btn btn-primary' href="domains.php?name=[[urlencode(%%entry.getVal('domainname')%%)]]">Domain Details</a>
+	</td>
+</tr>

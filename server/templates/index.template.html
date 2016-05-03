@@ -1,0 +1,34 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>Crawling the "Internet"</h1>
+<div class='alert alert-neutral'>
+    <div class="progress">
+		<div class="progress-bar progress-bar-success" style="width: [[percentDone]]%;">
+			<span class='sr-only'>[[Util::number(%%done%%)]]</span>
+		</div>
+		<div class="progress-bar progress-bar-warning" style="width: [[percentLeft]]%;">
+			<span class='sr-only'>[[Util::number(%%left%%)]]</span>
+		</div>
+	</div>
+	<span style='color: #00BB00;'>[[Util::number(%%done%%)]]</span> done ([[Util::number(%%refCount%%)]] references found)<br>
+	<span style='color: #FF4444;'>[[Util::number(%%left%%)]]</span> left<br><br>
+	Currently active agents: <b>[[numAgents]]</b><br>
+	Current average speed: <b>[[speed]] sites/min</b> (ETA [[timeLeft]] days)<br><br>
+	<i>Stats are delayed up to 15 minutes.</i>
+</div>
+<div id="graph-wrapper" class='col-md-12'>
+	<div class="graph-info">
+		<a href="javascript:void(0)" class="done">Done</a>
+		<a href="javascript:void(0)" class="left">Left</a>
+		<a href="javascript:void(0)" class="refs">Refs</a>
+
+		<a href="#" id="bars"><span></span></a>
+		<a href="#" id="lines" class="active"><span></span></a>
+	</div>
+
+	<div class="graph-container">
+		<div id="graph-lines"></div>
+		<div id="graph-bars"></div>
+	</div>
+</div>
+{%TEMPLATE->foot%}

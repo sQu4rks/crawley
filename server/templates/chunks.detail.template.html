@@ -1,0 +1,25 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>Chunk Details</h1>
+{{IF ! !!chunk!!}}
+	<div class='alert alert-danger'>
+		Invalid Chunk!
+	</div>
+{{ENDIF}}
+{{IF !!chunk!!}}
+	<div class="panel panel-default">
+		<table class="table table-bordered table-nonfluid">
+			<tr>
+				<th>Domain</th>
+				<th>HTTP Status</th>
+				<th>Scan Time</th>
+				<th>Generator Metatag</th>
+				<th>&nbsp;</th>
+			</tr>
+			{{FOREACH entry,!!data!!}}
+				{%TEMPLATE->chunks.detail.entry%}
+			{{ENDFOREACH}}
+		</table>
+	</div>
+{{ENDIF}}
+{%TEMPLATE->foot%}

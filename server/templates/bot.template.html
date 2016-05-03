@@ -1,0 +1,58 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>What are you doing? <small>Or why are you visiting my website?</small></h1>
+<p>
+	Crawly is a research project at the <a href="https://www.unibas.ch/">University of Basel</a>. It is 
+	conducted within the scope of the 
+	<a href="http://informatik.unibas.ch/fs2016/internet-technologien/">internet technology</a> lecture.<br>
+	The goal of this project is to crawl the web and extract meta informations about the technology used to 
+	build the website. Particulary, we're interested in websites generated with 
+	<a href="https://www.wordpress.org">Wordpress</a>.
+</p>
+<p>
+	Wordpress is one of the most, if not the, most popular content management system powering a good portion 
+	of websites. Wordpress is famous for it's 5-minute installation, that enables non-technical people to 
+	get an up and running version of Wordpress within a few minutes. But beeing a big web project also means, 
+	that Wordpress is vulnerable against attacks. As of 5th of April 2016, 
+	<a href="https://wpvulndb.com/">wpvulndb</a> is listing more than 4255 known vulnerabilities for Wordpress 
+	core and it's themes and plugins. <br>
+	Wordpress doesn't require forced updating, which leads to a diverse range of versions, publically 
+	accessable on the web. The idea of this project is to index the web and shed light on the used versions 
+	of Wordpress. Additionally, we want to check if the website forces the user to use a secure https 
+	connection over the unencrypted http version. 
+</p>
+
+<h3>How do you access these informations?<small>Are you hacking my server?</small></h3>
+<p>
+	In short, <strong>no we are not hacking your webserver</strong>. We crawl (see below) the web and extract 
+	meta informations from the html of your webpage. In the 
+	<span style="font-family:monospace;">&lt;meta name="generator"&gt;</span> tag Wordpress is providing 
+	version informations such as 
+	<span style="font-family:monospace;">&lt;meta name="generator" content="WordPress 4.4.2"&gt;</span>. We 
+	use this information. 
+</p>
+<p>
+	To index wether you'r providing secure https we simply request your webpage on http as well as https. 
+</p>
+<p>
+	Since we can't request all webpages in the world by hand, this is done by a crawler. The crawler requests 
+	a webpage, extracts all the information and then scans for new links that should be crawled. This way, 
+	we're jumping from web page to web page. In theory this means, that we can find every webpage that is 
+	linked to by any other page. This is pretty much the same that google is doing, when building their 
+	search index. <br>
+	You can identify a crawly agent by it's useragent string 
+	<span style="font-family:monospace;">User-Agent: Crawly2.0 - https://crawl.hashes.org/bot.php</span>
+</p>
+
+<h3>What are you doing with these infos?<small>And how to get out?</small></h3>
+<p>
+	None of the crawling results are publically accessible, and we will <strong>never publish a list of 
+	vulnerable sites</strong>. The results will just be used for statistics in our report. If you want us to 
+	rather not visit your website or have your website appear in our dataset, simple contact us 
+	(mail adresses are below) with a list of websites and we'll blacklist them as well as deleting them from 
+	our database. 
+</p>
+<br>
+Kind regards,<br>
+Sein Coray &amp; Marcel Neidinger ({s.coray,m.neidinger}@unibas.ch)
+{%TEMPLATE->foot%}

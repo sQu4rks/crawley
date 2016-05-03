@@ -1,0 +1,83 @@
+{%TEMPLATE->head%}
+{%TEMPLATE->menu%}
+<h1>[[domain.getVal('domainName')]]</h1>
+<div class="panel panel-default">
+	<table class="table table-bordered table-nonfluid">
+		<tr>
+			<th>DomainName</th>
+			<th>Scan Time</th>
+			<th>Generator</th>
+			<th>HTTP Status</th>
+		</tr>
+		<tr>
+			<td>[[domain.getVal('domainname')]]</td>
+			<td>
+				{{IF !!domain.getVal('time')!! != ""}}
+					[[date("d.m.Y - H:i:s", %%domain.getVal('time')%%)]]
+				{{ENDIF}}
+				{{IF !!domain.getVal('time')!! == ""}}
+					---
+				{{ENDIF}}
+			</td>
+			<td>
+				{{IF !!domain.getVal('generatormeta')!! != "" && !!domain.getVal('time')!! != 0}}
+					<code>[[domain.getVal('generatormeta')]]</code>
+				{{ENDIF}}
+				{{IF !!domain.getVal('generatormeta')!! == "" && !!domain.getVal('time')!! != 0}}
+					<code>---</code>
+				{{ENDIF}}
+				{{IF !!domain.getVal('time')!! == 0}}
+					UNKNOWN
+				{{ENDIF}}
+			</td>
+			<td>
+				{{IF !!domain.getVal('httpstatus')!! == -1 && !!domain.getVal('time')!! != 0}}
+					OFFLINE
+				{{ENDIF}}
+				{{IF !!domain.getVal('httpstatus')!! == 0 && !!domain.getVal('time')!! != 0}}
+					HTTPS ONLY
+				{{ENDIF}}
+				{{IF !!domain.getVal('httpstatus')!! == 1 && !!domain.getVal('time')!! != 0}}
+					HTTP ONLY
+				{{ENDIF}}
+				{{IF !!domain.getVal('httpstatus')!! == 2 && !!domain.getVal('time')!! != 0}}
+					HTTP + HTTPS
+				{{ENDIF}}
+				{{IF !!domain.getVal('time')!! == 0}}
+					UNKNOWN
+				{{ENDIF}}
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="panel panel-default">
+	<table class="table table-bordered table-nonfluid">
+		<tr>
+			<th colspan='2' style='text-align: center;'>Referred pages</th>
+		</tr>
+		{{FOREACH ref,!!refsFrom!!}}
+			<tr>
+				<td><code>[[ref.getVal('todomain')]]</code></td>
+				<td>
+					<a href="domains.php?name=[[urlencode(%%ref.getVal('todomain')%%)]]" class='btn btn-primary'>View</a>
+				</td>
+			</tr>	
+		{{ENDFOREACH}}
+	</table>
+</div>
+<div class="panel panel-default">
+	<table class="table table-bordered table-nonfluid">
+		<tr>
+			<th colspan='2' style='text-align: center;'>Referred from</th>
+		</tr>
+		{{FOREACH ref,!!refsTo!!}}
+			<tr>
+				<td><code>[[ref.getVal('fromdomain')]]</code></td>
+				<td>
+					<a href="domains.php?name=[[urlencode(%%ref.getVal('fromdomain')%%)]]" class='btn btn-primary'>View</a>
+				</td>
+			</tr>	
+		{{ENDFOREACH}}
+	</table>
+</div>
+{%TEMPLATE->foot%}
